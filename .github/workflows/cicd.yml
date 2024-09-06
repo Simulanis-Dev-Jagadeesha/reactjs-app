@@ -14,8 +14,8 @@ jobs:
       - name: Build Docker Image (Development)
         run: docker build -t integrationninjas/reactjs-app:dev --target dev .
 
-      - name: Build Docker Image (Production)
-        run: docker build -t integrationninjas/reactjs-app:prod --target prod .
+#      - name: Build Docker Image (Production)
+#        run: docker build -t integrationninjas/reactjs-app:prod --target prod .
 
   deploy-dev: 
     needs: build
