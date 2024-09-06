@@ -21,8 +21,12 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
-      - name: Delete Old Dev Container
-        run: docker rm -f reactContainer-dev || true
+#      - name: Delete Old Dev Container
+#        run: docker rm -f reactContainer-dev || true
+      - name: Stop Containers Using Port 3000
+        run: |
+          docker ps --filter "publish=3000" --format "{{.ID}}" | xargs -r docker stop
+          docker ps --filter "publish=3000" --format "{{.ID}}" | xargs -r docker rm
 
       - name: Run Docker Container (Development)
         run: docker run -d -p 3000:3000 --name reactContainer-dev integrationninjas/reactjs-app:dev npm start
