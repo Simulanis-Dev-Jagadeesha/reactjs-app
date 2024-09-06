@@ -24,4 +24,6 @@ jobs:
         run: docker rm -f reactContainer || true  # Ignore if container does not exist
 
       - name: Run Docker Container
-        run: docker run -d -p 3000:80 --name reactContainer integrationninjas/reactjs-app
+        run: docker run -d -p 3000:80 --name reactContainer integrationninjas/reactjs-app npm start
+
+        
