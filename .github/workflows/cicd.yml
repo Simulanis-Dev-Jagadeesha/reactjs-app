@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - ubuntu
 
 jobs:
   build:
@@ -33,7 +32,7 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
-      
+
       - name: Delete Old Prod Container
         run: docker rm -f reactContainer-prod || true
 
