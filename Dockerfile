@@ -13,16 +13,16 @@ EXPOSE 3000
 CMD ["npm", "start"]
 
 
-FROM node:18-alpine AS prod
+#FROM node:18-alpine AS prod
 
-WORKDIR /app
-COPY package.json .
-RUN npm install --only=production
-COPY . .
-RUN npm run build
-
-
-EXPOSE 3000
+#WORKDIR /app
+#COPY package.json .
+#RUN npm install --only=production
+#COPY . .
+#RUN npm run build
 
 
-CMD ["npm", "run", "serve"]
+#EXPOSE 3000
+
+
+#CMD ["npm", "run", "serve"]

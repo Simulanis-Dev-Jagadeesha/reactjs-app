@@ -15,16 +15,16 @@ services:
     environment:
       - NODE_ENV=development
 
-  app-prod:
-    build:
-      context: .
-      target: prod  # Use 'prod' stage for production
-    ports:
-      - "3000:3000"
-    networks:
-      - app-network
-    environment:
-      - NODE_ENV=production
+ # app-prod:
+ # build:
+ #     context: .
+  #    target: prod  # Use 'prod' stage for production
+  #  ports:
+   #   - "3000:3000"
+   # networks:
+   #   - app-network
+   # environment:
+   #   - NODE_ENV=production
 
 volumes:
   app-data:

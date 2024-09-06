@@ -27,16 +27,16 @@ jobs:
       - name: Run Docker Container (Development)
         run: docker run -d -p 3000:3000 --name reactContainer-dev integrationninjas/reactjs-app:dev npm start
 
-  deploy-prod: 
-    needs: build
-    runs-on: self-hosted
-    steps:
+#  deploy-prod: 
+#    needs: build
+#    runs-on: self-hosted
+#    steps:
+#
+#      - name: Delete Old Prod Container
+#        run: docker rm -f reactContainer-prod || true
 
-      - name: Delete Old Prod Container
-        run: docker rm -f reactContainer-prod || true
-
-      - name: Run Docker Container (Production)
-        run: docker run -d -p 3000:3000 --name reactContainer-prod integrationninjas/reactjs-app:prod npm run serve
+#      - name: Run Docker Container (Production)
+#        run: docker run -d -p 3000:3000 --name reactContainer-prod integrationninjas/reactjs-app:prod npm run serve
 
 
         
