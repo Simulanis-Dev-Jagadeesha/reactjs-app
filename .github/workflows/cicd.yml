@@ -13,17 +13,31 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v3
         
-      - name: Build Docker Image
-        run: docker build -t integrationninjas/reactjs-app .
+      - name: Build Docker Image (Development)
+        run: docker build -t integrationninjas/reactjs-app:dev --target dev .
 
-  deploy: 
+      - name: Build Docker Image (Production)
+        run: docker build -t integrationninjas/reactjs-app:prod --target prod .
+
+  deploy-dev: 
     needs: build
     runs-on: self-hosted
     steps:
-      - name: Delete Old Container
-        run: docker rm -f reactContainer || true  # Ignore if container does not exist
+      - name: Delete Old Dev Container
+        run: docker rm -f reactContainer-dev || true
 
-      - name: Run Docker Container
-        run: docker run -d -p 3000:3000 --name reactContainer integrationninjas/reactjs-app npm start
+      - name: Run Docker Container (Development)
+        run: docker run -d -p 3000:3000 --name reactContainer-dev integrationninjas/reactjs-app:dev npm start
+
+  deploy-prod: 
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Delete Old Prod Container
+        run: docker rm -f reactContainer-prod || true
+
+      - name: Run Docker Container (Production)
+        run: docker run -d -p 3000:3000 --name reactContainer-prod integrationninjas/reactjs-app:prod npm run serve
+
 
         

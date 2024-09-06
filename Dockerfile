@@ -1,15 +1,28 @@
-FROM node:alpine3.18 as build
+# Development Stage
+FROM node:18-alpine AS dev
+
 WORKDIR /app
 COPY package.json .
 RUN npm install
-COPY . . 
+COPY . .
+
+# Expose port for development environment
 EXPOSE 3000
+
+# Default command for development
+CMD ["npm", "start"]
+
+# Production Stage
+FROM node:18-alpine AS prod
+
+WORKDIR /app
+COPY package.json .
+RUN npm install --only=production
+COPY . .
 RUN npm run build
 
+# Expose port for production
+EXPOSE 3000
 
-#FROM nginx:1.23-alpine
-#WORKDIR /urs/share/nginx/html
-#RUN rm -rf *
-#COPY --from=build /app/build .
-#EXPOSE 80
-#ENTRYPOINT [ "nginx", "-g","daemon off;" ]
+# Command for production environment
+CMD ["npm", "run", "serve"]

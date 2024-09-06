@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      target: dev  # Use 'dev' stage for development
+    volumes:
+      - .:/app        # Mount local directory for live development
+      - /app/node_modules  # Prevent node_modules conflicts
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=development
+
+  app-prod:
+    build:
+      context: .
+      target: prod  # Use 'prod' stage for production
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=production
+
+volumes:
+  app-data:
+
+networks:
+  app-network:
+    driver: bridge
